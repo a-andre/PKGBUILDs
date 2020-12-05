@@ -6,9 +6,8 @@ sd_fuse() {
     exit 0
   fi
 
-  dd if=/boot/idbloader.img of=/dev/${device} seek=64 conv=notrunc
-  dd if=/boot/uboot.img of=/dev/${device} seek=16384 conv=notrunc
-  dd if=/boot/trust.img of=/dev/${device} seek=24576 conv=notrunc
+  dd if=/boot/rksd_loader.img of=/dev/${device} seek=64 conv=notrunc
+  dd if=/boot/u-boot.itb of=/dev/${device} seek=16384 conv=notrunc
 }
 
 flash_uboot() {
@@ -28,9 +27,8 @@ flash_uboot() {
     sd_fuse $device
   else
     echo "You can do this later by running:"
-    echo "# dd if=/boot/idbloader.img of=/dev/${device} seek=64 conv=notrunc"
-    echo "# dd if=/boot/uboot.img of=/dev/${device} seek=16384 conv=notrunc"
-    echo "# dd if=/boot/trust.img of=/dev/${device} seek=24576 conv=notrunc"
+    echo "# dd if=/boot/rksd_loader.img of=/dev/${device} seek=64 conv=notrunc"
+    echo "# dd if=/boot/u-boot.itb of=/dev/${device} seek=16384 conv=notrunc"
   fi
 }
 
