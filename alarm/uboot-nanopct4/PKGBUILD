@@ -3,7 +3,7 @@
 buildarch=8
 
 pkgname=uboot-nanopct4
-pkgver=2021.01
+pkgver=2021.04
 pkgrel=1
 pkgdesc="U-Boot for NanoPC-T4"
 arch=('aarch64')
@@ -17,7 +17,7 @@ source=("https://ftp.denx.de/pub/u-boot/u-boot-${pkgver}.tar.bz2"
         "git+https://github.com/rockchip-linux/rkbin.git#commit=$_commit_rkbin"
         "boot.txt"
         "mkscr")
-sha256sums=('b407e1510a74e863b8b5cb42a24625344f0e0c2fc7582d8c866bd899367d0454'
+sha256sums=('0d438b1bb5cceb57a18ea2de4a0d51f7be5b05b98717df05938636e0aadfe11a'
             'SKIP'
             'd72d3d297b13dd30269810c0787fef6fc487a6672c717a9de8cc00bac2be2be7'
             'a4fc8b6b92bc364d6542670d294aa618a8501fb8729f415cc0a3eed776ef0c8e')
