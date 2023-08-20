@@ -3,28 +3,28 @@
 buildarch=8
 
 pkgname=uboot-nanopct4
-pkgver=2021.10
+pkgver=2023.07.02
 pkgrel=1
 pkgdesc="U-Boot for NanoPC-T4"
 arch=('aarch64')
 url='http://www.denx.de/wiki/U-Boot/WebHome'
 license=('GPL')
 backup=('boot/boot.txt' 'boot/boot.scr')
-makedepends=('bc' 'git' 'dtc')
+makedepends=('bc' 'git' 'dtc' 'python-setuptools' 'swig')
 install=${pkgname}.install
-_commit_rkbin=0bb1c512492386a72a3a0b5a0e18e49c636577b9
+_commit_rkbin=b4558da0860ca48bf1a571dd33ccba580b9abe23
 source=("https://ftp.denx.de/pub/u-boot/u-boot-${pkgver}.tar.bz2"
         "git+https://github.com/rockchip-linux/rkbin.git#commit=$_commit_rkbin"
         "boot.txt"
         "mkscr")
-sha256sums=('cde723e19262e646f2670d25e5ec4b1b368490de950d4e26275a988c36df0bd4'
+sha256sums=('6b6a48581c14abb0f95bd87c1af4d740922406d7b801002a9f94727fdde021d5'
             'SKIP'
             'd72d3d297b13dd30269810c0787fef6fc487a6672c717a9de8cc00bac2be2be7'
             'a4fc8b6b92bc364d6542670d294aa618a8501fb8729f415cc0a3eed776ef0c8e')
 
 prepare() {
   cd ${srcdir}/u-boot-${pkgver}
-  cp ../rkbin/bin/rk33/rk3399_bl31_v1.35.elf ./bl31.elf
+  cp ../rkbin/bin/rk33/rk3399_bl31_v1.36.elf ./bl31.elf
 
   cd ${srcdir}/u-boot-${pkgver}/configs
   echo 'CONFIG_IDENT_STRING=" Arch Linux ARM"' >> nanopc-t4-rk3399_defconfig
@@ -35,9 +35,9 @@ build() {
 
   unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
 
+  export BL31=bl31.elf
   make nanopc-t4-rk3399_defconfig
   make EXTRAVERSION=-${pkgrel}
-  make EXTRAVERSION=-${pkgrel} u-boot.itb
 }
 
 package() {
